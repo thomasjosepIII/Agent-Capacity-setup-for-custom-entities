@@ -7,11 +7,11 @@ This and many other resources for your implementation are available here ([Dynam
 Agent Capacity Recap
 Let’s review the Unified Routing and how capacity is setup and released for the native Case entity. Capacity is managed in two places, at the User level and at the Workstream level. The Workstream for Cases is setup with ‘Unit based’ capacity and the ‘cost’ of each incoming Case is set at a numerical value. Here I’ve created a new Workstream for Record routing for the Case table. I set the Capacity to Unit based and the value of each case = 25.
  
-![](images/rc1.png)
+![](Images/RC1.png)
 
 I’ll then go to User management then to Enhanced user management, open my User record and navigate to the Omnichannel Tab. Here I’ll set the Capacity = 100.
 
-![](images/rc2.png)
+![](Images/RC2.png)
  
 Therefore, if I have a Case Workstream and a Chat Workstream and the Unit based capacity for the Chat Workstream = 30, my Agents can have any combination of Cases and Chats as long as the total never exceeds 100.
 Now that this is setup, records will begin routing to our Agents. The Case record comes in and gets routed to our Agent. The mechanism that handles the routing is the Queue Item entity. This record has a relationship to our routed record (Object) and to the Agent to whom it was routed to (Worked by). Once our Agent completes the Case, the ‘Worked by’ Agent relationship value is removed and the record is deactivated thereby clearing the 25 capacity points from our Agent.
@@ -19,12 +19,12 @@ Now that this is setup, records will begin routing to our Agents. The Case recor
 ## No-Code solution to release Capacity non-Case records
 The advantage of the no-code solution is, that, well, it does not require you to be a developer and know C#! The example Flows you will see below took us about an hour or so to put together and test. Let’s walk through the Workstream setup for the entity along with the capacity. Let’s create a custom activity entity and complete the setup. I am using Unit based capacity and the value of my custom entity = 25.
 
-![](images/rc3.png)
+![](Images/RC3.png)
  
 ## Route non-case records using PowerAutomate
 We then have to automate the creation of our associated Queue Item record. This can be done in PowerAutomate by inserting a ‘Perform an unbound action’ step with the Action Name = msdyn_ApplyRoutingRuleEntityRecord. 
 
-![](images/rc4.png)
+![](Images/RC4.png)
  
 ## Close live work items using PowerAutomate
 Next, we have to account for removing the Agent from the ‘Worked by’ lookup on the Queue Item record thereby releasing the capacity of our custom entity (25 points) from our Agent. I too can utilize PowerAutomate for this. 
@@ -33,7 +33,7 @@ Note: Your business requirements may differ from the example below and therefore
 
 In short, when our record is updated and if the Status = Completed, list the related Queue Item, put a ‘-1’ in the Worked by field and change the Status and Status Reason fields to Inactive. 
 
-![](images/rc5.png)
+![](Images/RC5.png)
  
 ## Low-Code solution to release Capacity non-Case entity
 The advantages of the ‘Low-Code’ solution is that it is a synchronous job and your business processes may require a solution that is a bit closer to real-time than you get with the ‘No-Code’ solution. The setup for the Workstream and capacity will be the same as the previous example.
