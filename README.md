@@ -42,7 +42,7 @@ The advantages of the ‘Low-Code’ solution is that it is a synchronous job an
 The first step here is also similar to the previous example in that we have to route the non-case record which also creates the Queue Item record we see natively when a Case is routed. The good news is, the steps and sample code to perform this action are available here ([Route non-case records using a plug-in](https://learn.microsoft.com/en-us/dynamics365/customer-service/trigger-routing-non-case-records)). You’ll notice the plugin triggers the same msdyn_ApplyRoutingRuleEntityRecord as does our PowerAutomate solution!
 
 ## Close live work items or deactivate queue items
-There is more good news here as well! There is sample code available here 9[Close live work items or deactivate queue items](https://learn.microsoft.com/en-us/dynamics365/customer-service/deactivate-queue-items)) to achieve the second series of actions to close our Queue Item records accordingly. 
+There is more good news here as well! There is sample code available here ([Close live work items or deactivate queue items](https://learn.microsoft.com/en-us/dynamics365/customer-service/deactivate-queue-items)) to achieve the second series of actions to close our Queue Item records accordingly. 
 
 ## Defining your business processes
 A key thing to keep in mind is the business process that drives these updates within your organization. It’s critical that time is spent defining and documenting what each step in the lifecycle of your non-case record will be. Both of our solution example listed here assume the following basic process;
